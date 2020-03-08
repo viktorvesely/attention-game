@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: purple;
+    overflow: hidden;
+}
+
+.task-viewport {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+}
+
+.flash-animation {
+    animation-name: flash;
+    animation-duration: var(--animationDuration);
+    animation-iteration-count: 1;
+}
+
+@keyframes flash {
+    0% {
+        transform: scale(1);
+        color: var(--originColor);
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: white;
+    }
+    100% {
+        transform: scale(1);
+        color: var(--originColor);
+    }
+}
+
+#left {
+    background-color: rgb(219, 125, 17);
+    box-shadow: inset 0px 0px 9px 1px black;
+}
+
+#right {
+    background-color: rgb(230, 235, 235);
+    box-shadow: inset 0px 0px 9px 1px black;
+}
+
+.event {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    border-color: rgb(0, 0, 0);
+}
+
+.visual-square {
+    border-radius: 5px;
+    border: 3px solid;
+}
+
+.visual-circle {
+    border: 3px solid;
+    border-radius: 50%;
+}
+
+.visual-x{
+
+}
+
+.visual-triangle {
+}
+
+path {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2.5px;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 12;
+}
+
+.overlay .text {
+    position: relative;
+    top: 15%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 80px;
+    color: black;
+    display: block;
+    text-align: center;
+}
+
+#graph {
+    position: absolute;
+    z-index: 100;
+    opacity: 0;
+    background-color: orange;
+    width: 800px;
+    height: 60%;
+    top: 0;
+    left: calc(50% - 400px);
+    transition: opacity 0.2s ;
+}
