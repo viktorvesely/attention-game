@@ -90,8 +90,10 @@ class Module {
         if (this.last_event_occurence != -1) {
             if(!this.onButtonCallback()) {
                 this.add_penalty(g_penalty_wrong_event);
-                console.log("Wrong shape");
                 this.event_failed();
+            }
+            else {
+                this.add_event_on_timeline("event_react");
             }
             this.event_reacted();
         } else {
@@ -112,12 +114,14 @@ class Module {
         if (this.reactionModifierCallback) {
             time = this.reactionModifierCallback(time);
         }
+        this.add_event_on_timeline(`reaction:${time}`);
         this.reactions_sum += time;
         this.event_occurances++;
     }
 
     add_penalty(time) {
         this.reactions_sum += time;
+        this.add_event_on_timeline(`penalty:${time}`);
     }
 
     get_avg_reaction() {
@@ -127,7 +131,6 @@ class Module {
     event_end() {
         if (this.isEventValidCallback()) {
             let reaction_time = this.now() - this.last_event_occurence;
-            console.log(`Event ended with:${reaction_time} ms reaction time`);
             this.add_reaction(reaction_time);
         }
         this.last_event_occurence = -1;
@@ -135,7 +138,6 @@ class Module {
     }
 
     event_reacted() {
-        this.add_event_on_timeline("event_react");
         this.event_end();
     }
 
@@ -147,8 +149,12 @@ class Module {
         if (!this.onEventCallback) {
             throw new Error("On event callback has to be initialized before starting the game!");
         }
-        this.onEventCallback();
-        this.add_event_on_timeline("event_start");
+        if (this.onEventCallback()) {
+            this.add_event_on_timeline("event_start");
+        } else {
+            this.add_event_on_timeline("decoy_start");
+        }
+        
         this.last_event_occurence = this.now();
     }
 

@@ -100,9 +100,9 @@ path {
     z-index: 100;
     opacity: 0;
     background-color: orange;
-    width: 800px;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     top: 0;
-    left: calc(50% - 400px);
+    left: 0;
     transition: opacity 0.2s ;
 }

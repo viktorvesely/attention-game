@@ -1,4 +1,4 @@
-const g_audio_handicap_reaction = 350;
+const g_audio_handicap_reaction = 120;
 const Audio_events_names = ["ginger", "glasses", "machine", "mango"];
 
 class AudioModule extends Module {
@@ -93,6 +93,7 @@ class AudioModule extends Module {
 
     event_act() {
         this.play_random_not_previous_event();
+        return this.current_audio_id === this.expected_event;
     }
 
     event_button() {

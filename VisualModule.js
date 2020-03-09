@@ -138,6 +138,7 @@ class VisualModule extends Module {
 
     event_act() {
         this.show_random_not_previous_event();
+        return this.event_show === this.expected_event;
     }
 
     event_button() {

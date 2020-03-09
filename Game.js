@@ -1,5 +1,5 @@
 const g_animation_duration = 0.18; // seconds
-const g_tick_base = 80; // ticks per seconds
+const g_tick_base = 64; // ticks per seconds
 
 class Game {
     constructor(game_time=30) {
@@ -93,7 +93,7 @@ class Game {
         avg_reaction_time /= 2;
         avg_reaction_time = Math.round(avg_reaction_time);
         this.set_text(`Avg reaction time: ${avg_reaction_time}ms`);
-        new Grapher(this.left_port.events, this.right_port.events);
+        new Grapher().set_data(this.left_port.events, this.right_port.events);
     }
 
     step() {
